@@ -904,6 +904,7 @@ void CSRStorage<ValueType>::setDiagonalImpl( const LAMAArray<OtherValueType>& di
 
 /* --------------------------------------------------------------------------- */
 
+#if 0
 template<typename ValueType>
 template<typename OtherType>
 void CSRStorage<ValueType>::getRowImpl( LAMAArray<OtherType>& row, const IndexType i ) const
@@ -925,6 +926,7 @@ void CSRStorage<ValueType>::getRowImpl( LAMAArray<OtherType>& row, const IndexTy
         wRow[ja[jj]] = static_cast<OtherType>( values[jj] );
     }
 }
+#endif
 
 /* --------------------------------------------------------------------------- */
 

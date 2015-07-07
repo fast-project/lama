@@ -250,7 +250,26 @@ public:
     /** Template method for getting row. */
 
     template<typename OtherType>
-    void getRowImpl( LAMAArray<OtherType>& row, const IndexType i ) const;
+    void getRowImpl( LAMAArray<OtherType>& row, const IndexType i ) const
+{
+    LAMA_ASSERT_DEBUG( i >= 0 && i < mNumRows, "row index " << i << " out of range" )
+
+    HostWriteOnlyAccess<OtherType> wRow( row, mNumColumns );
+
+    const HostReadAccess<IndexType> ia( mIa );
+    const HostReadAccess<IndexType> ja( mJa );
+    const HostReadAccess<ValueType> values( mValues );
+
+    for ( IndexType j = 0; j < mNumColumns; ++j )
+    {
+        wRow[j] = 0.0;
+    }
+    for ( IndexType jj = ia[i]; jj < ia[i + 1]; ++jj )
+    {
+        wRow[ja[jj]] = static_cast<OtherType>( values[jj] );
+    }
+}
+
 
     /** Typed version of getDiagonal
      *

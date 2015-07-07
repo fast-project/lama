@@ -145,12 +145,12 @@ void Criterion::setRightChild( const CriterionPtr rightChild )
 
 bool Criterion::hasLeftChild() const
 {
-    return mLeftChild;
+    return mLeftChild != NULL;
 }
 
 bool Criterion::hasRightChild() const
 {
-    return mRightChild;
+    return mRightChild != NULL;
 }
 
 void Criterion::setOperation( const Criterion::BooleanOperator operation )
